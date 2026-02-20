@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClearCareer Outcomes Report — The Data Behind the Transformation</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* ClearCareer / AstroWind-aligned palette */
+  --accent: #6D28D9;         /* Purple — AstroWind accent */
+  --accent-light: #8B5CF6;
+  --accent-muted: rgba(109,40,217,0.08);
+  --accent-border: rgba(109,40,217,0.18);
+  --slate-900: #0F172A;
+  --slate-800: #1E293B;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748B;
+  --slate-400: #94A3B8;
+  --slate-300: #CBD5E1;
+  --slate-200: #E2E8F0;
+  --slate-100: #F1F5F9;
+  --slate-50: #F8FAFC;
+  --white: #FFFFFF;
+  --green: #059669;
+  --green-light: #10B981;
+  --green-muted: rgba(5,150,105,0.08);
+  --green-border: rgba(5,150,105,0.18);
+  --amber: #D97706;
+  --amber-muted: rgba(217,119,6,0.08);
+  --amber-border: rgba(217,119,6,0.18);
+  --radius: 12px;
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--white);
+  color: var(--slate-800);
+  line-height: 1.65;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+  background: var(--white);
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-muted);
+  border: 1px solid var(--accent-border);
+  color: var(--accent);
+  padding: 6px 18px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  max-width: 720px;
+  margin-bottom: 16px;
+  color: var(--slate-900);
+  letter-spacing: -0.03em;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.08rem;
+  color: var(--slate-500);
+  max-width: 500px;
+  margin-bottom: 44px;
+  font-weight: 400;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.hero-stat {
+  text-align: center;
+  padding: 20px 24px;
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-xs);
+  min-width: 130px;
+}
+
+.hero-stat .num {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.hero-stat .label {
+  font-size: 0.7rem;
+  color: var(--slate-500);
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-weight: 600;
+}
+
+/* ── SECTIONS ── */
+.section {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 72px 24px;
+}
+
+.section-alt {
+  background: var(--slate-50);
+}
+
+.section-label {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.section h2 {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  color: var(--slate-900);
+  letter-spacing: -0.02em;
+}
+
+.section .subtitle {
+  color: var(--slate-500);
+  font-size: 0.98rem;
+  max-width: 580px;
+  margin-bottom: 40px;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  height: 1px;
+  background: var(--slate-200);
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+/* ── CARDS ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 24px;
+  border: 1px solid var(--slate-200);
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.section-alt .card {
+  background: var(--white);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+
+.card .big-num {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+
+.card .big-num.green { color: var(--green); }
+.card .big-num.amber { color: var(--amber); }
+
+.card h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--slate-800);
+}
+
+.card p {
+  font-size: 0.82rem;
+  color: var(--slate-500);
+  line-height: 1.5;
+}
+
+/* ── CHART CONTAINERS ── */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .chart-row { grid-template-columns: 1fr; }
+}
+
+.chart-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 22px;
+  border: 1px solid var(--slate-200);
+  box-shadow: var(--shadow-xs);
+}
+
+.section-alt .chart-card {
+  background: var(--white);
+}
+
+.chart-card h3 {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+  color: var(--slate-800);
+}
+
+.chart-card .chart-sub {
+  font-size: 0.75rem;
+  color: var(--slate-400);
+  margin-bottom: 16px;
+}
+
+.chart-card canvas {
+  max-height: 280px;
+}
+
+/* ── CONFIDENCE SHIFT ── */
+.confidence-shift {
+  background: var(--white);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius);
+  padding: 44px;
+  text-align: center;
+  margin-bottom: 36px;
+  box-shadow: var(--shadow-xs);
+}
+
+.confidence-shift .shift-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--slate-400);
+  margin-bottom: 20px;
+}
+
+.confidence-shift .arrow-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  margin: 0 0 12px;
+  flex-wrap: wrap;
+}
+
+.confidence-shift .score-box { text-align: center; }
+
+.confidence-shift .score-box .val {
+  font-size: 3.6rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.confidence-shift .score-box .val.before { color: var(--slate-300); }
+.confidence-shift .score-box .val.after { color: var(--accent); }
+
+.confidence-shift .score-box .tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-top: 4px;
+  color: var(--slate-400);
+}
+
+.confidence-shift .arrow {
+  font-size: 2rem;
+  color: var(--slate-300);
+}
+
+.confidence-shift .delta {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--green);
+  letter-spacing: -0.02em;
+}
+
+.confidence-shift .shift-note {
+  color: var(--slate-500);
+  font-size: 0.85rem;
+  margin-top: 12px;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── TESTIMONIAL STRIP ── */
+.testimonial-strip {
+  background: var(--slate-50);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 20px 24px;
+  margin: 24px 0;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--slate-600);
+  line-height: 1.6;
+}
+
+.section-alt .testimonial-strip {
+  background: var(--white);
+}
+
+.testimonial-strip .attribution {
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* ── SALARY IMPACT ── */
+.salary-highlight {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .salary-highlight { grid-template-columns: 1fr; }
+}
+
+.salary-big {
+  background: var(--white);
+  border: 1px solid var(--green-border);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  box-shadow: var(--shadow-xs);
+}
+
+.salary-big .amount {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.salary-big .desc {
+  color: var(--slate-500);
+  font-size: 0.85rem;
+  margin-top: 6px;
+}
+
+/* ── RESOURCE RATINGS BAR ── */
+.resource-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.resource-bar .name {
+  width: 120px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  flex-shrink: 0;
+  color: var(--slate-600);
+}
+
+.resource-bar .bar-track {
+  flex: 1;
+  height: 22px;
+  background: var(--slate-100);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 0 10px;
+}
+
+.resource-bar .bar-fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width 1s ease;
+}
+
+.resource-bar .score {
+  width: 34px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+/* ── NPS ── */
+.nps-block {
+  background: var(--white);
+  border: 1px solid var(--amber-border);
+  border-radius: var(--radius);
+  padding: 44px;
+  text-align: center;
+  margin-bottom: 36px;
+  box-shadow: var(--shadow-xs);
+}
+
+.nps-block .nps-score {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: var(--amber);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.nps-block .nps-label {
+  font-size: 0.72rem;
+  color: var(--slate-400);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+.nps-block .nps-context {
+  font-size: 0.85rem;
+  color: var(--slate-500);
+  margin-top: 14px;
+  max-width: 460px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ── COMPARISON RING ── */
+.comparison-ring {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 28px 0;
+}
+
+.ring-stat {
+  text-align: center;
+  background: var(--white);
+  border: 1px solid var(--slate-200);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-xs);
+  min-width: 140px;
+  flex: 1;
+  max-width: 200px;
+}
+
+.ring-stat .ring-num {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--accent);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ring-stat .ring-desc {
+  font-size: 0.75rem;
+  color: var(--slate-500);
+  margin-top: 4px;
+}
+
+/* ── QUOTE WALL ── */
+.quote-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.quote-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid var(--slate-200);
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--slate-600);
+  line-height: 1.55;
+  box-shadow: var(--shadow-xs);
+}
+
+.section-alt .quote-card {
+  background: var(--white);
+}
+
+/* ── CTA ── */
+.cta-section {
+  text-align: center;
+  padding: 80px 24px;
+  background: var(--slate-900);
+  color: var(--white);
+}
+
+.cta-section h2 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+
+.cta-section p {
+  color: var(--slate-400);
+  max-width: 440px;
+  margin: 0 auto 28px;
+  font-size: 0.95rem;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  padding: 14px 36px;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 2px 8px rgba(109,40,217,0.25);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(109,40,217,0.35);
+}
+
+.fine-print {
+  text-align: center;
+  padding: 24px;
+  font-size: 0.7rem;
+  color: var(--slate-400);
+  background: var(--white);
+}
+
+@media (max-width: 600px) {
+  .hero-stats { gap: 8px; }
+  .hero-stat { min-width: 110px; padding: 14px 12px; }
+  .hero-stat .num { font-size: 1.6rem; }
+  .confidence-shift { padding: 28px 16px; }
+  .confidence-shift .score-box .val { font-size: 2.6rem; }
+  .section { padding: 44px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-badge">🚀 58 Clients Surveyed · Real Data · Real Results</div>
+  <h1>The Numbers Behind <span>the Transformation</span></h1>
+  <p>A comprehensive analysis of outcomes from ClearCareer members — confidence shifts, salary impact, speed to hire, and what people actually said.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">84%</div>
+      <div class="label">5-Star Rating</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">$1.2M+</div>
+      <div class="label">Collective Raises</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">84</div>
+      <div class="label">NPS Score</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">+84%</div>
+      <div class="label">Confidence Lift</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ WHERE THEY STARTED ═══════════ -->
+<div class="section-alt">
+<section class="section">
+  <span class="section-label">01 — Where They Started</span>
+  <h2>People came in stuck, depleted, and doubting themselves.</h2>
+  <p class="subtitle">Most members had been searching for months, sending applications into the void, and questioning whether something was wrong with them.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="big-num">76%</div>
+      <h3>Had been searching 3+ months</h3>
+      <p>43% had been searching 7 months or longer before joining. Some over 2 years.</p>
+    </div>
+    <div class="card">
+      <div class="big-num">2.45</div>
+      <h3>Average confidence (out of 5)</h3>
+      <p>60% rated their confidence a 1 or 2 out of 5. The search had taken a real toll.</p>
+    </div>
+    <div class="card">
+      <div class="big-num">76%</div>
+      <h3>Had 5 or fewer interviews</h3>
+      <p>Despite months of effort, applications weren't converting. 44 of 58 had secured 5 or fewer.</p>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-card">
+      <h3>Top Challenges When They Arrived</h3>
+      <div class="chart-sub">Self-reported biggest challenge before joining</div>
+      <canvas id="challengesChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>How Long They'd Been Searching</h3>
+      <div class="chart-sub">Job search duration before ClearCareer</div>
+      <canvas id="durationChart"></canvas>
+    </div>
+  </div>
+
+  <div class="testimonial-strip">
+    "For me, the level of support I received at this price point was unmatched. After experiencing layoffs, I invested in other career coaches but didn't even receive the bare minimum of support that Izzy has provided."
+    <div class="attribution">— ClearCareer Member</div>
+  </div>
+</section>
+</div>
+
+<!-- ═══════════ CONFIDENCE SHIFT ═══════════ -->
+<section class="section">
+  <span class="section-label">02 — The Confidence Shift</span>
+  <h2>The single biggest transformation is invisible on a resume.</h2>
+  <p class="subtitle">Before strategy. Before assets. Before interviews. The first thing that changes is how people see themselves.</p>
+
+  <div class="confidence-shift">
+    <div class="shift-label">Self-Reported Job Search Confidence (1–5)</div>
+    <div class="arrow-container">
+      <div class="score-box">
+        <div class="val before">2.45</div>
+        <div class="tag">Before</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="score-box">
+        <div class="val after">4.50</div>
+        <div class="tag" style="color: var(--accent);">After</div>
+      </div>
+    </div>
+    <div class="delta">+84% increase</div>
+    <p class="shift-note">93% of members rated their confidence a 4 or 5 after the program — up from just 10% before.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="big-num green">83%</div>
+      <h3>Reported significant confidence gains</h3>
+      <p>48 of 58 rated the confidence outcome a 4 or 5 — the highest-rated outcome in the survey.</p>
+    </div>
+    <div class="card">
+      <div class="big-num green">79%</div>
+      <h3>Gained significant clarity</h3>
+      <p>46 of 58 rated "More Clarity" a 4 or 5. People stopped spinning and started moving with purpose.</p>
+    </div>
+    <div class="card">
+      <div class="big-num green">74%</div>
+      <h3>Overcame their #1 challenge</h3>
+      <p>43 of 58 rated challenge resolution a perfect 5/5. Overall average: 4.67.</p>
+    </div>
+  </div>
+
+  <div class="testimonial-strip">
+    "I experienced a dramatic transformation in terms of my self-efficacy and confidence in the value that I bring to organizations."
+    <div class="attribution">— ClearCareer Member</div>
+  </div>
+
+  <div class="testimonial-strip">
+    "Izzy and ClearCareer provided me the toolset and confidence to multiply my earnings, improve my work-life balance and hit my goals. Since the program, I've gotten married, purchased a home, and have climbed up to a VP role."
+    <div class="attribution">— ClearCareer Member</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ FINANCIAL IMPACT ═══════════ -->
+<div class="section-alt">
+<section class="section">
+  <span class="section-label">03 — The Financial Impact</span>
+  <h2>The program pays for itself. Then it keeps paying.</h2>
+  <p class="subtitle">Of members who landed roles, 84% increased their compensation. The average salary increase was $21,742.</p>
+
+  <div class="salary-highlight">
+    <div class="salary-big">
+      <div class="amount">$1.2M+</div>
+      <div class="desc">Total collective salary increases across program members</div>
+    </div>
+    <div class="salary-big">
+      <div class="amount">$21.7K</div>
+      <div class="desc">Average salary increase for members who negotiated higher pay</div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="big-num green">84%</div>
+      <h3>Of those who landed increased their salary</h3>
+      <p>31 of 37 members who secured roles negotiated higher compensation.</p>
+    </div>
+    <div class="card">
+      <div class="big-num amber">42%</div>
+      <h3>Negotiated $20K+ raises</h3>
+      <p>14 members secured increases of $20K+. Two exceeded $50K. One surpassed $100K.</p>
+    </div>
+    <div class="card">
+      <div class="big-num">64%</div>
+      <h3>Landed a role during the program</h3>
+      <p>37 of 58 members landed jobs, with 21 still actively searching at survey time.</p>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-card">
+      <h3>Salary Increase Distribution</h3>
+      <div class="chart-sub">Among members who reported salary gains</div>
+      <canvas id="salaryChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Time to Land a Job</h3>
+      <div class="chart-sub">Among the 37 members who secured offers</div>
+      <canvas id="timeToLandChart"></canvas>
+    </div>
+  </div>
+
+  <div class="testimonial-strip">
+    "I saw an 83% salary increase using ClearCareer's negotiation and interviewing techniques. As a disabled person, the program accepted me and worked with me, exactly as I am."
+    <div class="attribution">— ClearCareer Member</div>
+  </div>
+</section>
+</div>
+
+<!-- ═══════════ SPEED ═══════════ -->
+<section class="section">
+  <span class="section-label">04 — Speed to Results</span>
+  <h2>Months of spinning. Then weeks to momentum.</h2>
+  <p class="subtitle">68% of members who landed jobs did so within 2 months. 46% within a single month.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="big-num">46%</div>
+      <h3>Landed within 1 month</h3>
+      <p>17 of 37 who got offers did so in 4 weeks or less — after many had been stuck for 6–12+ months.</p>
+    </div>
+    <div class="card">
+      <div class="big-num">68%</div>
+      <h3>Landed within 2 months</h3>
+      <p>25 of 37 secured a role in under 8 weeks.</p>
+    </div>
+    <div class="card">
+      <div class="big-num">43%</div>
+      <h3>Had been searching 7+ months before</h3>
+      <p>25 members were stuck for over half a year — and 64% of them landed after joining.</p>
+    </div>
+  </div>
+
+  <div class="testimonial-strip">
+    "I got a job in 2 weeks after two years of looking and wrote my own job description — it's pretty wild."
+    <div class="attribution">— ClearCareer Member</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ RESOURCES ═══════════ -->
+<div class="section-alt">
+<section class="section">
+  <span class="section-label">05 — What People Actually Used</span>
+  <h2>Every resource rated. Every skill measured.</h2>
+  <p class="subtitle">The top-rated resources: Resume support, Email Templates, Motivation, and Accountability.</p>
+
+  <div class="chart-card" style="margin-bottom: 24px;">
+    <h3>Resource Ratings (Average out of 5)</h3>
+    <div class="chart-sub">How members rated each ClearCareer resource</div>
+    <div style="padding: 10px 0;">
+      <div class="resource-bar"><span class="name">Resume</span><div class="bar-track"><div class="bar-fill" style="width: 90.6%"></div></div><span class="score">4.53</span></div>
+      <div class="resource-bar"><span class="name">Email Templates</span><div class="bar-track"><div class="bar-fill" style="width: 89%"></div></div><span class="score">4.45</span></div>
+      <div class="resource-bar"><span class="name">Motivation</span><div class="bar-track"><div class="bar-fill" style="width: 89%"></div></div><span class="score">4.45</span></div>
+      <div class="resource-bar"><span class="name">Accountability</span><div class="bar-track"><div class="bar-fill" style="width: 88.2%"></div></div><span class="score">4.41</span></div>
+      <div class="resource-bar"><span class="name">LinkedIn</span><div class="bar-track"><div class="bar-fill" style="width: 87.6%"></div></div><span class="score">4.38</span></div>
+      <div class="resource-bar"><span class="name">AI Prompts</span><div class="bar-track"><div class="bar-fill" style="width: 84.4%"></div></div><span class="score">4.22</span></div>
+      <div class="resource-bar"><span class="name">Weekly Calls</span><div class="bar-track"><div class="bar-fill" style="width: 83.4%"></div></div><span class="score">4.17</span></div>
+      <div class="resource-bar"><span class="name">Courses</span><div class="bar-track"><div class="bar-fill" style="width: 81%"></div></div><span class="score">4.05</span></div>
+      <div class="resource-bar"><span class="name">Skool</span><div class="bar-track"><div class="bar-fill" style="width: 75.8%"></div></div><span class="score">3.79</span></div>
+      <div class="resource-bar"><span class="name">Other Members</span><div class="bar-track"><div class="bar-fill" style="width: 73.4%"></div></div><span class="score">3.67</span></div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-card">
+      <h3>Skills Improvement (Avg 1–5)</h3>
+      <div class="chart-sub">Self-reported improvement across 11 skill areas</div>
+      <canvas id="skillsChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Time Saved Per Week with AI Tools</h3>
+      <div class="chart-sub">88% of members save 1+ hours per week</div>
+      <canvas id="timeSavedChart"></canvas>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═══════════ AI FLUENCY ═══════════ -->
+<section class="section">
+  <span class="section-label">06 — AI Fluency</span>
+  <h2>From "I've never used AI" to fluent and confident.</h2>
+  <p class="subtitle">43% had rarely or never used AI before. 98% say ClearCareer's prompts outperform anything else they've tried.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="big-num">98%</div>
+      <h3>Rate ClearCareer prompts better</h3>
+      <p>Of those who compared, 45 of 46 say the prompts produce better or significantly better results.</p>
+    </div>
+    <div class="card">
+      <div class="big-num">43%</div>
+      <h3>Had rarely or never used AI before</h3>
+      <p>25 members were AI beginners. The program met them where they were.</p>
+    </div>
+    <div class="card">
+      <div class="big-num">57%</div>
+      <h3>Now confident & fluent with AI</h3>
+      <p>33 members now describe themselves as confident and fluent AI users.</p>
+    </div>
+  </div>
+
+  <div class="chart-card" style="margin-top: 12px;">
+    <h3>AI Prompt Quality vs. Other Sources</h3>
+    <div class="chart-sub">How members compared ClearCareer's AI prompts to others</div>
+    <canvas id="aiCompareChart"></canvas>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════ THE VERDICT ═══════════ -->
+<div class="section-alt">
+<section class="section">
+  <span class="section-label">07 — The Verdict</span>
+  <h2>The kind of numbers that don't need spin.</h2>
+  <p class="subtitle">NPS of 84. Average rating 4.84/5. 98% rate ClearCareer better than any other program.</p>
+
+  <div class="nps-block">
+    <div class="nps-score">84</div>
+    <div class="nps-label">Net Promoter Score</div>
+    <p class="nps-context">For context: An NPS above 50 is excellent. Above 70 is world-class. Apple is 72. Netflix is 68. ClearCareer is 84.</p>
+  </div>
+
+  <div class="comparison-ring">
+    <div class="ring-stat">
+      <div class="ring-num">84%</div>
+      <div class="ring-desc">Perfect 5/5 overall rating</div>
+    </div>
+    <div class="ring-stat">
+      <div class="ring-num">71%</div>
+      <div class="ring-desc">Perfect 10/10 recommendation</div>
+    </div>
+    <div class="ring-stat">
+      <div class="ring-num">98%</div>
+      <div class="ring-desc">Rated better than other programs</div>
+    </div>
+    <div class="ring-stat">
+      <div class="ring-num">4.84</div>
+      <div class="ring-desc">Average overall rating out of 5</div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-card">
+      <h3>Overall Program Rating</h3>
+      <div class="chart-sub">84% gave a perfect 5 stars</div>
+      <canvas id="overallChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h3>Likelihood to Recommend (1–10)</h3>
+      <div class="chart-sub">71% gave a perfect 10</div>
+      <canvas id="npsChart"></canvas>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ═══════════ QUOTE WALL ═══════════ -->
+<section class="section">
+  <span class="section-label">08 — In Their Words</span>
+  <h2>You don't have to take our word for it.</h2>
+  <p class="subtitle">Unedited responses from the survey: "Did you experience any other major transformations?"</p>
+
+  <div class="quote-grid">
+    <div class="quote-card">"I got a job in 2 weeks after two years of looking and wrote my own job description — it's pretty wild."</div>
+    <div class="quote-card">"Since the program, I've gotten married, purchased a home, and climbed up to a VP role. No other program has come close."</div>
+    <div class="quote-card">"I saw an 83% salary increase. As a disabled person, the program accepted me exactly as I am."</div>
+    <div class="quote-card">"ClearCareer helped me realize my values and not accept lower rates."</div>
+    <div class="quote-card">"The emotional support of a community with a good leader is priceless."</div>
+    <div class="quote-card">"This program really goes above and beyond. It teaches you to work smarter."</div>
+    <div class="quote-card">"I was promoted within 3 months."</div>
+    <div class="quote-card">"Cold outreach emails are so much better — with almost 100% response rate."</div>
+    <div class="quote-card">"I've grown more confident in my personal life as well."</div>
+    <div class="quote-card">"The level of support at this price point was unmatched."</div>
+    <div class="quote-card">"I feel like my career is finally on track and I'm being fairly compensated for the first time."</div>
+    <div class="quote-card">"I feel supported on my journey and my anxiety has gone down significantly. Izzy is the wizard."</div>
+    <div class="quote-card">"ClearCareer helped me understand WHAT I wanted to pursue. I was floating for years."</div>
+    <div class="quote-card">"I switched careers a year later — drawing on what I learned made it so much easier."</div>
+    <div class="quote-card">"Working with Izzy transformed my career and my life."</div>
+  </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section class="cta-section">
+  <h2>Ready to rewrite your numbers?</h2>
+  <p>The Job Search Ignition System begins March 2, 2026. 10 founding spots.</p>
+  <a href="#" class="cta-btn">Book Your Free Job Search Audit →</a>
+</section>
+
+<div class="fine-print">
+  Data from 58 ClearCareer program participants surveyed in December 2024. All figures are self-reported. Individual results vary.<br>
+  Collective salary figure of $1.2M+ includes additional verified sources beyond this survey.
+</div>
+
+<!-- ═══════════ CHARTS ═══════════ -->
+<script>
+Chart.defaults.color = '#64748B';
+Chart.defaults.borderColor = 'rgba(0,0,0,0.04)';
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.size = 11;
+
+const accent = '#6D28D9';
+const accentLight = '#8B5CF6';
+const green = '#059669';
+const greenLight = '#10B981';
+const amber = '#D97706';
+const slate300 = '#CBD5E1';
+const slate200 = '#E2E8F0';
+const slate100 = '#F1F5F9';
+
+new Chart(document.getElementById('challengesChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Lack of\nconfidence', 'Unclear\ngoals', 'Staying\nmotivated', 'Getting\ninterviews', 'Improving\nresume', 'Interview\nprep', 'Networking', 'LinkedIn'],
+    datasets: [{
+      data: [11, 11, 10, 9, 9, 6, 1, 1],
+      backgroundColor: [accent, accent, accentLight, accentLight, accentLight, slate300, slate200, slate200],
+      borderRadius: 4, barThickness: 24
+    }]
+  },
+  options: { indexAxis: 'y', responsive: true, plugins: { legend: { display: false } },
+    scales: { x: { grid: { display: false }, ticks: { stepSize: 5 } }, y: { grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('durationChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['3–6 mo', '7–12 mo', '1–2 yr', '1 mo', '2 mo', '<2 wk', '2–4 wk', '2+ yr'],
+    datasets: [{ data: [18, 16, 8, 6, 5, 2, 2, 1],
+      backgroundColor: [accent, accentLight, '#A78BFA', amber, '#FCD34D', slate300, slate200, '#E9D5FF'],
+      borderWidth: 2, borderColor: '#FFFFFF', hoverOffset: 5 }]
+  },
+  options: { responsive: true, cutout: '55%',
+    plugins: { legend: { position: 'right', labels: { padding: 8, usePointStyle: true, pointStyle: 'circle', font: { size: 10 } } } } }
+});
+
+new Chart(document.getElementById('salaryChart'), {
+  type: 'bar',
+  data: {
+    labels: ['$1–5K', '$5–10K', '$10–15K', '$15–20K', '$20–25K', '$25–30K', '$50–75K', '$100K+'],
+    datasets: [{ data: [5, 5, 4, 2, 8, 6, 2, 1],
+      backgroundColor: [slate200, slate200, greenLight+'88', greenLight+'BB', green, green, amber, amber],
+      borderRadius: 4, barThickness: 24 }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } },
+    scales: { y: { grid: { display: false }, beginAtZero: true }, x: { grid: { display: false }, ticks: { font: { size: 9 } } } } }
+});
+
+new Chart(document.getElementById('timeToLandChart'), {
+  type: 'bar',
+  data: {
+    labels: ['<2 wk', '2–4 wk', '1 mo', '2 mo', '3–6 mo', '7–12 mo', '1–2 yr'],
+    datasets: [{ data: [3, 7, 7, 8, 9, 2, 1],
+      backgroundColor: [green, green, greenLight, accentLight, accent, slate300, slate200],
+      borderRadius: 4, barThickness: 24 }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } },
+    scales: { y: { grid: { display: false }, beginAtZero: true }, x: { grid: { display: false }, ticks: { font: { size: 9 } } } } }
+});
+
+new Chart(document.getElementById('skillsChart'), {
+  type: 'radar',
+  data: {
+    labels: ['Resume', 'LinkedIn Profile', 'LinkedIn Research', 'Value Prop', 'Email Outreach', 'ChatGPT', 'Interviewing', 'Market Research', 'Networking', 'Perplexity', 'Other AI'],
+    datasets: [{ data: [4.36, 4.17, 4.17, 4.02, 4.02, 4.03, 3.95, 3.86, 3.83, 3.76, 3.69],
+      backgroundColor: accent + '10', borderColor: accent, borderWidth: 2, pointBackgroundColor: accent, pointRadius: 3 }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } },
+    scales: { r: { beginAtZero: true, max: 5, ticks: { stepSize: 1, display: false },
+      grid: { color: 'rgba(0,0,0,0.04)' }, angleLines: { color: 'rgba(0,0,0,0.04)' },
+      pointLabels: { font: { size: 9, weight: 500 }, color: '#334155' } } } }
+});
+
+new Chart(document.getElementById('timeSavedChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['1–3 hrs', '4–6 hrs', '<1 hr', '7–10 hrs', '10+ hrs'],
+    datasets: [{ data: [30, 11, 7, 6, 4],
+      backgroundColor: [accent, accentLight, slate200, green, amber],
+      borderWidth: 2, borderColor: '#FFFFFF', hoverOffset: 5 }]
+  },
+  options: { responsive: true, cutout: '55%',
+    plugins: { legend: { position: 'right', labels: { padding: 8, usePointStyle: true, pointStyle: 'circle', font: { size: 10 } } } } }
+});
+
+new Chart(document.getElementById('aiCompareChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Significantly\nbetter', 'Better', 'N/A (first\nAI prompts)', 'About\nthe same'],
+    datasets: [{ data: [19, 26, 12, 1],
+      backgroundColor: [green, accentLight, slate200, slate100],
+      borderRadius: 4, barThickness: 40 }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } },
+    scales: { y: { grid: { display: false }, beginAtZero: true }, x: { grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('overallChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['5 Stars', '4 Stars'],
+    datasets: [{ data: [49, 9], backgroundColor: [accent, slate200],
+      borderWidth: 2, borderColor: '#FFFFFF', hoverOffset: 5 }]
+  },
+  options: { responsive: true, cutout: '65%',
+    plugins: { legend: { position: 'bottom', labels: { padding: 14, usePointStyle: true, pointStyle: 'circle' } } } }
+});
+
+new Chart(document.getElementById('npsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['7', '8', '9', '10'],
+    datasets: [{ data: [3, 6, 8, 41],
+      backgroundColor: [slate200, accentLight, accent, green],
+      borderRadius: 4, barThickness: 40 }]
+  },
+  options: { responsive: true, plugins: { legend: { display: false } },
+    scales: { y: { grid: { display: false }, beginAtZero: true }, x: { grid: { display: false } } } }
+});
+</script>
+
+</body>
+</html>
