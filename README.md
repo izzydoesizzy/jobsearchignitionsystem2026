@@ -47,9 +47,9 @@ A cohort of ten. Eight weeks of building, not just talking. Done-for-you resume,
 
 ---
 
-## 🎥 Hear From Izzy
+## 🎥 What People Say
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/HLQ4uncTZOw" title="Job Search Ignition System" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Job Search Ignition System](https://img.youtube.com/vi/HLQ4uncTZOw/maxresdefault.jpg)](https://www.youtube.com/embed/HLQ4uncTZOw)
 
 ---
 
