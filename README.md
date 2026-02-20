@@ -282,7 +282,7 @@ Job searches take time - especially in this market. After the program, you can j
 *$20,000 salary increase + annual bonuses after months of rejection*
 After months of rejection despite strong dedication, Tamara gained clarity, transformed her resume, and landed multiple interviews within weeks. She accepted a role with a $20,000 salary increase plus annual bonuses - giving her the financial stability she needed for her family.
 
-![Tamara Gordon testimonial](assets/testimonials/tamara-gordon.png)
+![Tamara Gordon testimonial](tamara-gordon.png)
 
 ---
 
@@ -290,7 +290,7 @@ After months of rejection despite strong dedication, Tamara gained clarity, tran
 *1 year unemployed. Hired in 3 weeks.*
 Unemployed for an entire year despite having a lot of experience and still stuck. After working with Izzy, she was employed in just three weeks. He helped her articulate her unique skill set and shifted her mindset to act like a consultant in her interview - she ended up writing her own job description.
 
-![Kristin Davis testimonial](assets/testimonials/kristin-davis.png)
+![Kristin Davis testimonial](kristin-davis.png)
 
 ---
 
@@ -298,7 +298,7 @@ Unemployed for an entire year despite having a lot of experience and still stuck
 *200+ applications, zero offers - then 27 targeted emails and multiple interviews*
 After applying to over 200 jobs and getting only 10 interviews and no offers, Blake tried the Izzy Method. He sent 27 targeted emails, got multiple responses, and landed a full-time role - at a company that had previously rejected him. He also negotiated a $5,000 salary increase on the offer.
 
-![Blake McDermott testimonial](assets/testimonials/blake-mcdermott.png)
+![Blake McDermott testimonial](blake-mcdermott.png)
 
 ---
 
@@ -306,7 +306,7 @@ After applying to over 200 jobs and getting only 10 interviews and no offers, Bl
 *600+ applications over a year. Hired in 30 days.*
 After over a year of frustration, Sparsh followed Izzy's advice exactly. Within 30 days, he had a job.
 
-![Sparsh Kalia testimonial](assets/testimonials/sparsh-kalia.png)
+![Sparsh Kalia testimonial](sparsh-kalia.png)
 
 ---
 
@@ -314,7 +314,7 @@ After over a year of frustration, Sparsh followed Izzy's advice exactly. Within 
 *Dream job landed. Salary up $22,000 - a 30%+ increase.*
 Working with Izzy to apply to her dream job was one of the best decisions she ever made. He supported her every step of the way - demonstrating her value, preparing for the interview, and sending an impactful follow-up email. She landed the role and bumped her salary by $22,000 a year (more than a 30% increase).
 
-![Laura Salamanca testimonial](assets/testimonials/laura-salamanca.png)
+![Laura Salamanca testimonial](laura-salamanca.png)
 
 ---
 
@@ -322,7 +322,7 @@ Working with Izzy to apply to her dream job was one of the best decisions she ev
 *Freelancer to full-time - with a negotiated counteroffer and the long-term stability she needed*
 Transitioning from freelancing to full-time, Kira lacked confidence in self-promotion and negotiation. Her lightbulb moment came when Izzy helped her see the job search from the employer's perspective. Together they refined her story, and she negotiated a strong counteroffer - securing competitive compensation, good benefits, and the long-term stability she needed.
 
-![Kira Howe testimonial](assets/testimonials/kira-howe.png)
+![Kira Howe testimonial](kira-howe.png)
 
 ---
 
@@ -330,7 +330,7 @@ Transitioning from freelancing to full-time, Kira lacked confidence in self-prom
 *600+ applications, 3 interviews - then a full salary offer without taking a pay cut*
 Before working with Izzy, Darin had applied to 600+ jobs and only landed three interviews. Izzy helped him slow down, focus on quality over quantity, and be proactive in reaching out to hiring managers. Things turned around rapidly - he signed an offer maintaining his full salary without having to take a pay cut like countless other job seekers.
 
-![Darin Mellor testimonial](assets/testimonials/darin-mellor.png)
+![Darin Mellor testimonial](/darin-mellor.png)
 
 ---
 
@@ -338,7 +338,7 @@ Before working with Izzy, Darin had applied to 600+ jobs and only landed three i
 *Director-level role landed after reframing her doubts and finding her unique value*
 A key moment for Raunika was when Izzy helped her reframe her doubts by identifying her unique value. She stayed focused, landed a Director-level role at a large Canadian payments company.
 
-![Raunika Lamge testimonial](assets/testimonials/raunika-lamge.png)
+![Raunika Lamge testimonial](/raunika-lamge.png)
 
 ---
 
