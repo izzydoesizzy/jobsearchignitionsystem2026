@@ -1814,6 +1814,224 @@ img {
 }
 
 /* ============================================================
+   SUPERNOVA™ SECTION
+   ============================================================ */
+
+.section-supernova {
+  background: linear-gradient(180deg, #F8FAFF 0%, #ffffff 100%);
+}
+
+.supernova-intro {
+  max-width: 720px;
+  margin: 0 auto 32px;
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.75;
+}
+
+.supernova-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.supernova-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  background: #fff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.supernova-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-bg);
+}
+
+.supernova-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.supernova-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.supernova-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+.supernova-bottom {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.supernova-bottom p {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* ============================================================
+   ROI SECTION
+   ============================================================ */
+
+.roi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.roi-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  background: #fff;
+  text-align: center;
+}
+
+.roi-outcome {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--blue);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.roi-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.roi-detail {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+.roi-summary {
+  text-align: center;
+  margin-top: 24px;
+  padding: 20px 24px;
+  background: var(--blue-bg);
+  border-radius: 8px;
+}
+
+.roi-summary p {
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+/* ============================================================
+   COMPETITIVE COMPARISON TABLE
+   ============================================================ */
+
+.comparison-table-wrap {
+  overflow-x: auto;
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.comparison-table th {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  background: #fafafa;
+  white-space: nowrap;
+}
+
+.comparison-table th.comparison-highlight {
+  color: var(--blue);
+  background: var(--blue-bg);
+}
+
+.comparison-table td.comparison-highlight {
+  background: var(--blue-bg);
+  color: var(--text);
+}
+
+.comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-row-label {
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   TWO-TIER PRICING GRID
+   ============================================================ */
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 24px;
+  margin-bottom: 32px;
+}
+
+.pricing-card-featured {
+  border-color: var(--blue);
+  background: var(--blue-bg);
+  position: relative;
+}
+
+.pricing-card-featured::before {
+  content: 'Most Popular';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: var(--blue);
+  padding: 3px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+/* ============================================================
    RESPONSIVE
    ============================================================ */
 
@@ -1896,6 +2114,27 @@ img {
 
   .leap-grid {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .supernova-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roi-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-table {
+    font-size: 13px;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px 12px;
   }
 }
 
@@ -2002,6 +2241,22 @@ img {
   .about-block,
   .about-block.about-block-flip {
     grid-template-columns: 1fr;
+  }
+
+  .supernova-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .roi-outcome {
+    font-size: 20px;
   }
 }
 
